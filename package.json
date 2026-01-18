@@ -1,0 +1,25 @@
+{
+  "name": "eggnet-world-invite-cli",
+  "version": "0.1.0",
+  "description": "World one-click invite link generator for EggNet (https://www.eggnet.space)",
+  "main": "src/cli.js",
+  "bin": {
+    "eggnet-invite": "src/cli.js"
+  },
+  "scripts": {
+    "start": "node src/cli.js"
+  },
+  "keywords": [
+    "minecraft",
+    "bedrock",
+    "eggnet",
+    "invite",
+    "cli",
+    "puppeteer"
+  ],
+  "author": "YOUR_NAME",
+  "license": "MIT",
+  "dependencies": {
+    "puppeteer": "^23.0.0"
+  }
+}

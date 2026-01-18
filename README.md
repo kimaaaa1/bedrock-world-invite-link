@@ -2,31 +2,35 @@
 
 Turn your Minecraft Bedrock **world** into a clickable invite link.
 
-Instead of asking people to type IPs, ports, or manually add a server entry, this tool lets you share **one URL** that can bring players straight into your Bedrock world – using EggNet under the hood (https://www.eggnet.space).
+On Bedrock (especially on Xbox), players don’t normally “join by IP”.  
+They join through friends, invites, Realms, or a fixed list of servers.  
+This repo focuses on a different feel:
 
-> Bedrock worlds normally don’t have a “just click this link and join” experience.  
-> This repo focuses on making that feel as close to real as possible.
+> “Here’s my Bedrock world link. Click it, and you’re in (through the EggNet flow).”
+
+Under the hood it uses EggNet (https://www.eggnet.space),  
+but from the host’s point of view it’s just: **get a stable invite link and reuse it.**
 
 ---
 
 ## Why this is actually a big deal
 
-On Bedrock Edition, this kind of flow is **surprisingly rare**:
+For Bedrock worlds, this kind of **“world as a link”** flow is rare:
 
-- No manual IP/port typing  
-- No “add external server, then join” flow  
-- You hand out **one invite URL**, and the heavy lifting is handled by the EggNet side  
+- No “type this IP:port” step
+- No manual “add external server, save, then join” UX
+- You share a **single URL** which represents your personal world
 
-From a player’s point of view, the experience you’re aiming for is basically:
+From the player side it feels much closer to:
 
-> “Here’s my Bedrock world link. Click it, and you’re in.”
+> “Click this invite link and end up in my Bedrock world.”
 
-This repo doesn’t re-implement the full networking stack.  
-It focuses on the **tech glue** that makes that capability practical for you as a host:
+This repo doesn’t implement the whole networking / matchmaking stack.  
+What it does is provide the **tech glue** that makes this usable in practice:
 
-- Persistent login/session management with Puppeteer  
-- A small CLI instead of clicking around in a browser every time  
-- A stable, reusable **world invite link** you can paste into Discord, DMs, streams, bots, etc.
+- Keeps an EggNet session alive using Puppeteer
+- Wraps everything in a small CLI instead of manual browser clicks
+- Gives you a **reusable Bedrock world invite link** you can drop into Discord, DMs, streams, bots, etc.
 
 ---
 
@@ -35,7 +39,7 @@ It focuses on the **tech glue** that makes that capability practical for you as 
 `bedrock-world-invite-link` is a small Node.js CLI that:
 
 - Opens EggNet in a real Chromium browser window on first run  
-- Lets you log in using the normal EggNet UI (no custom OAuth screens)  
+- Lets you log in using the normal EggNet UI  
 - Asks you to paste your personal world invite link  
   (for example: `https://www.eggnet.space/<your-id>`)  
 - Stores:
@@ -45,9 +49,9 @@ It focuses on the **tech glue** that makes that capability practical for you as 
 After that, every time you run the CLI:
 
 - Puppeteer starts headless with the same browser profile  
-- The CLI just prints your **Bedrock world invite link** in a clean format  
+- The CLI prints your **Bedrock world invite link** in a clean format  
 
-You end up with a “world as a link” workflow you can script around however you want.
+You end up with a workflow where your world is effectively **addressed by a URL**.
 
 ---
 
@@ -71,7 +75,7 @@ You end up with a “world as a link” workflow you can script around however y
    - No extra login steps, no manual browsing.  
    - The CLI prints your Bedrock world invite link, ready to copy, pin, or feed into other tooling.  
 
-The actual “turn this URL into a Bedrock world join” magic is provided by EggNet’s backend.  
+The actual “make this URL join a Bedrock world over the network” work is done by EggNet’s backend.  
 This repo is the **developer-facing CLI wrapper** around that capability.
 
 ---
@@ -81,7 +85,8 @@ This repo is the **developer-facing CLI wrapper** around that capability.
 - Node.js 18+ (recommended)  
 - npm  
 - An EggNet account  
-- Your personal Bedrock world invite link, e.g. `https://www.eggnet.space/<your-id>`  
+- Your personal Bedrock world invite link, for example:  
+  `https://www.eggnet.space/<your-id>`  
 
 ---
 
